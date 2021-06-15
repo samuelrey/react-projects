@@ -8,14 +8,35 @@ const Review = () => {
 
     const nextPerson = () => {
         setIndex((index) => {
-            return index < people.length - 1 ? index + 1 : 0;
+            return maybeWrapIndex(index + 1);
         });
     };
 
     const prevPerson = () => {
         setIndex((index) => {
-            return index > 0 ? index - 1 : people.length - 1;
+            return maybeWrapIndex(index - 1);
         });
+    };
+
+    const randomPerson = () => {
+        let newIndex = Math.floor(Math.random() * people.length);
+        if (newIndex === index) {
+            newIndex = maybeWrapIndex(index + 1);
+        }
+
+        setIndex(newIndex);
+    };
+
+    const maybeWrapIndex = (index) => {
+        if (index < 1) {
+            return people.length - 1;
+        }
+
+        if (index > people.length - 1) {
+            return 0;
+        }
+
+        return index;
     };
 
     return (
@@ -37,7 +58,9 @@ const Review = () => {
                     <FaChevronRight />
                 </button>
             </div>
-            <button className="random-btn">Surprise me</button>
+            <button className="random-btn" onClick={randomPerson}>
+                Surprise me
+            </button>
         </article>
     );
 };
