@@ -17,11 +17,6 @@ function App() {
         }
     };
 
-    const handleClick = (id) => {
-        const newActiveJob = jobs.map((job) => job.id).indexOf(id);
-        setActiveJob(newActiveJob);
-    };
-
     useEffect(() => {
         fetchJobs();
     }, []);
@@ -48,13 +43,12 @@ function App() {
                     {jobs.map((job, index) => {
                         return (
                             <button
-                                className={
-                                    index === activeJob
-                                        ? "job-btn active-btn"
-                                        : "job-btn false"
-                                }
+                                key={job.id}
+                                className={`job-btn ${
+                                    index === activeJob && "active-btn"
+                                }`}
                                 onClick={() => {
-                                    handleClick(job.id);
+                                    setActiveJob(index);
                                 }}
                             >
                                 {job.company}
@@ -66,9 +60,9 @@ function App() {
                     <h3>{title}</h3>
                     <h4>{company}</h4>
                     <p className="job-date">{dates}</p>
-                    {duties.map((duty) => {
+                    {duties.map((duty, index) => {
                         return (
-                            <div className="job-desc">
+                            <div key={index} className="job-desc">
                                 <FaAngleDoubleRight className="job-icon" />
                                 <p>{duty}</p>
                             </div>
