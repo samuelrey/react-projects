@@ -17,6 +17,11 @@ function App() {
         }
     };
 
+    const handleClick = (id) => {
+        const newActiveJob = jobs.map((job) => job.id).indexOf(id);
+        setActiveJob(newActiveJob);
+    };
+
     useEffect(() => {
         fetchJobs();
     }, []);
@@ -48,6 +53,9 @@ function App() {
                                         ? "job-btn active-btn"
                                         : "job-btn false"
                                 }
+                                onClick={() => {
+                                    handleClick(job.id);
+                                }}
                             >
                                 {job.company}
                             </button>
