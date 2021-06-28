@@ -2,10 +2,30 @@ import React, { useState, useEffect } from "react";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 import { FaQuoteRight } from "react-icons/fa";
 import data from "./data";
-function App() {
-    const [review, setReview] = useState(data[0]);
 
-    const { id, image, name, title, quote } = review;
+function App() {
+    const [reviews, setReviews] = useState(data);
+    const [activeReview, setActiveReview] = useState(0);
+
+    const { image, name, title, quote } = reviews[activeReview];
+
+    const handlePrev = () => {
+        setActiveReview(maybeWrapIndex(activeReview - 1));
+    };
+
+    const handleNext = () => {
+        setActiveReview(maybeWrapIndex(activeReview + 1));
+    };
+
+    const maybeWrapIndex = (i) => {
+        if (i < 0) {
+            return reviews.length - 1;
+        } else if (i == reviews.length) {
+            return 0;
+        } else {
+            return i;
+        }
+    };
 
     return (
         <div className="section">
@@ -23,10 +43,10 @@ function App() {
                     <p className="text">{quote}</p>
                     <FaQuoteRight className="icon" />
                 </article>
-                <button className="prev">
+                <button className="prev" onClick={handlePrev}>
                     <FiChevronLeft />
                 </button>
-                <button className="next">
+                <button className="next" onClick={handleNext}>
                     <FiChevronRight />
                 </button>
             </div>
