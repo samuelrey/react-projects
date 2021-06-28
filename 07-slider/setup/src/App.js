@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 import data from "./data";
 import Header from "./header";
 import ReviewList from "./review-list";
+import ReviewNav from "./review-nav";
 
 function App() {
     const [people, setPeople] = useState(data);
@@ -31,22 +31,14 @@ function App() {
             <Header />
             <div className="section-center">
                 <ReviewList people={people} activeIndex={activeIndex} />
-                <button
-                    className="prev"
-                    onClick={() => {
+                <ReviewNav
+                    handlePrev={() => {
                         setActiveIndex(activeIndex - 1);
                     }}
-                >
-                    <FiChevronLeft />
-                </button>
-                <button
-                    className="next"
-                    onClick={() => {
+                    handleNext={() => {
                         setActiveIndex(activeIndex + 1);
                     }}
-                >
-                    <FiChevronRight />
-                </button>
+                />
             </div>
         </div>
     );
