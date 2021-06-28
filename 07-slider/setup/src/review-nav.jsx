@@ -1,6 +1,7 @@
 import React from "react";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 
+// ReviewNav provides a pair of buttons to view different reviews.
 const ReviewNav = ({ handlePrev, handleNext }) => {
     return (
         <div>

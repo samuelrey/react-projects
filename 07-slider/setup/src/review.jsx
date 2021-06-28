@@ -1,6 +1,7 @@
 import React from "react";
 import { FaQuoteRight } from "react-icons/fa";
 
+// Review represents a single review.
 const Review = ({ image, name, title, quote, slideState }) => {
     return (
         <article className={slideState}>

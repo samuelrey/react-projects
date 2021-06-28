@@ -1,6 +1,8 @@
 import React from "react";
 import Review from "./review";
 
+// ReviewList renders all of the reviews and applies styling to make the one
+// active review visible and hide the others.
 const ReviewList = ({ people, activeIndex }) => {
     return (
         <div className="section-center">
