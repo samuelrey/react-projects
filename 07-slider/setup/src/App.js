@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 import data from "./data";
+import Header from "./header";
 import ReviewContainer from "./review-container";
 
 function App() {
@@ -27,12 +28,7 @@ function App() {
 
     return (
         <div className="section">
-            <div className="title">
-                <h2>
-                    <span>/</span>
-                    reviews
-                </h2>
-            </div>
+            <Header />
             <div className="section-center">
                 <ReviewContainer people={people} activeIndex={activeIndex} />
                 <button
