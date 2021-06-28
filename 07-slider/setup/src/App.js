@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
-
-import Review from "./review";
 import data from "./data";
+import ReviewContainer from "./review-container";
 
 function App() {
     const [people, setPeople] = useState(data);
@@ -35,21 +34,7 @@ function App() {
                 </h2>
             </div>
             <div className="section-center">
-                {people.map((person, index) => {
-                    const { id } = person;
-
-                    let position = "nextSlide";
-                    if (index === activeIndex) {
-                        position = "activeSlide";
-                    } else if (
-                        index === activeIndex - 1 ||
-                        (index === people.length - 1 && activeIndex === 0)
-                    ) {
-                        position = "lastSlide";
-                    }
-
-                    return <Review key={id} position={position} {...person} />;
-                })}
+                <ReviewContainer people={people} activeIndex={activeIndex} />
                 <button
                     className="prev"
                     onClick={() => {
