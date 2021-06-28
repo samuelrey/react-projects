@@ -7,23 +7,13 @@ function App() {
     const [people, setPeople] = useState(data);
     const [activeIndex, setActiveIndex] = useState(0);
 
-    const handlePrev = () => {
-        setActiveIndex(maybeWrapIndex(activeIndex - 1));
-    };
-
-    const handleNext = () => {
-        setActiveIndex(maybeWrapIndex(activeIndex + 1));
-    };
-
-    const maybeWrapIndex = (i) => {
-        if (i < 0) {
-            return people.length - 1;
-        } else if (i == people.length) {
-            return 0;
-        } else {
-            return i;
+    useEffect(() => {
+        if (activeIndex < 0) {
+            setActiveIndex(people.length - 1);
+        } else if (activeIndex > people.length - 1) {
+            setActiveIndex(0);
         }
-    };
+    }, [activeIndex, people]);
 
     return (
         <div className="section">
@@ -61,10 +51,20 @@ function App() {
                         </article>
                     );
                 })}
-                <button className="prev" onClick={handlePrev}>
+                <button
+                    className="prev"
+                    onClick={() => {
+                        setActiveIndex(activeIndex - 1);
+                    }}
+                >
                     <FiChevronLeft />
                 </button>
-                <button className="next" onClick={handleNext}>
+                <button
+                    className="next"
+                    onClick={() => {
+                        setActiveIndex(activeIndex + 1);
+                    }}
+                >
                     <FiChevronRight />
                 </button>
             </div>
