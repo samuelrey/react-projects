@@ -4,23 +4,21 @@ import { FaQuoteRight } from "react-icons/fa";
 import data from "./data";
 
 function App() {
-    const [reviews, setReviews] = useState(data);
-    const [activeReview, setActiveReview] = useState(0);
-
-    const { image, name, title, quote } = reviews[activeReview];
+    const [people, setPeople] = useState(data);
+    const [index, setIndex] = useState(0);
 
     const handlePrev = () => {
-        setActiveReview(maybeWrapIndex(activeReview - 1));
+        setIndex(maybeWrapIndex(index - 1));
     };
 
     const handleNext = () => {
-        setActiveReview(maybeWrapIndex(activeReview + 1));
+        setIndex(maybeWrapIndex(index + 1));
     };
 
     const maybeWrapIndex = (i) => {
         if (i < 0) {
-            return reviews.length - 1;
-        } else if (i == reviews.length) {
+            return people.length - 1;
+        } else if (i == people.length) {
             return 0;
         } else {
             return i;
@@ -36,13 +34,27 @@ function App() {
                 </h2>
             </div>
             <div className="section-center">
-                <article>
-                    <img src={image} alt={name} className="person-img" />
-                    <h4>{name}</h4>
-                    <p className="title">{title}</p>
-                    <p className="text">{quote}</p>
-                    <FaQuoteRight className="icon" />
-                </article>
+                {people.map((person, idx) => {
+                    const { id, image, name, title, quote } = person;
+                    return (
+                        <article
+                            key={id}
+                            className={
+                                idx === index ? "activeSlide" : "lastSlide"
+                            }
+                        >
+                            <img
+                                src={image}
+                                alt={name}
+                                className="person-img"
+                            />
+                            <h4>{name}</h4>
+                            <p className="title">{title}</p>
+                            <p className="text">{quote}</p>
+                            <FaQuoteRight className="icon" />
+                        </article>
+                    );
+                })}
                 <button className="prev" onClick={handlePrev}>
                     <FiChevronLeft />
                 </button>
