@@ -15,6 +15,16 @@ function App() {
         }
     }, [activeIndex, people]);
 
+    useEffect(() => {
+        let slider = setInterval(() => {
+            setActiveIndex(activeIndex + 1);
+        }, 3000);
+
+        // This return makes it so that the intervals are replaced every
+        // time index changes.
+        return () => clearInterval(slider);
+    }, [activeIndex]);
+
     return (
         <div className="section">
             <div className="title">
