@@ -5,14 +5,14 @@ import data from "./data";
 
 function App() {
     const [people, setPeople] = useState(data);
-    const [index, setIndex] = useState(0);
+    const [activeIndex, setActiveIndex] = useState(0);
 
     const handlePrev = () => {
-        setIndex(maybeWrapIndex(index - 1));
+        setActiveIndex(maybeWrapIndex(activeIndex - 1));
     };
 
     const handleNext = () => {
-        setIndex(maybeWrapIndex(index + 1));
+        setActiveIndex(maybeWrapIndex(activeIndex + 1));
     };
 
     const maybeWrapIndex = (i) => {
@@ -34,15 +34,21 @@ function App() {
                 </h2>
             </div>
             <div className="section-center">
-                {people.map((person, idx) => {
+                {people.map((person, index) => {
                     const { id, image, name, title, quote } = person;
+
+                    let position = "nextSlide";
+                    if (index === activeIndex) {
+                        position = "activeSlide";
+                    } else if (
+                        index === activeIndex - 1 ||
+                        (index === people.length - 1 && activeIndex === 0)
+                    ) {
+                        position = "lastSlide";
+                    }
+
                     return (
-                        <article
-                            key={id}
-                            className={
-                                idx === index ? "activeSlide" : "lastSlide"
-                            }
-                        >
+                        <article key={id} className={position}>
                             <img
                                 src={image}
                                 alt={name}
