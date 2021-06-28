@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 import data from "./data";
 import Header from "./header";
-import ReviewContainer from "./review-container";
+import ReviewList from "./review-list";
 
 function App() {
     const [people, setPeople] = useState(data);
@@ -30,7 +30,7 @@ function App() {
         <div className="section">
             <Header />
             <div className="section-center">
-                <ReviewContainer people={people} activeIndex={activeIndex} />
+                <ReviewList people={people} activeIndex={activeIndex} />
                 <button
                     className="prev"
                     onClick={() => {

@@ -1,7 +1,7 @@
 import React from "react";
 import Review from "./review";
 
-const ReviewContainer = ({ people, activeIndex }) => {
+const ReviewList = ({ people, activeIndex }) => {
     return (
         <div className="section-center">
             {people.map((person, index) => {
@@ -23,4 +23,4 @@ const ReviewContainer = ({ people, activeIndex }) => {
     );
 };
 
-export default ReviewContainer;
+export default ReviewList;
